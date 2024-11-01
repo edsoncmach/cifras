@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block 'content' %}
+    <h3>Cifras para Missa</h3>
+    <hr>
+    <div class="d-flex justify-content-end">
+        <div class="input-group">
+            <form action="?" method="GET" class="d-flex">
+                <div class="form-outline  me-3" data-mdb-input-init>
+                    <input class="form-control mb-2" type="date" id="form1" name="date" value="{{ request.GET.date }}" id="date">
+                </div>
+                <div>
+                    <button class="btn btn-primary btn-sm" type="submit">Buscar</button>
+                    <a class="btn btn-info btn-sm" href="{% url 'list-mass' %}">Limpar</a>
+                    <a class="btn btn-primary btn-sm" href="{% url 'create-mass' %}">Cadastrar</a> 
+                </div>
+            </form>
+        </div> 
+    </div>
+    <hr>
+    {% for mass in object_list %}
+    
+    <a class="btn btn-warning btn-sm" href="{% url 'update-mass' mass.pk %}">Editar</a> 
+        <table class="table table-hover">
+            <tr>
+                <th>Categoria</th>
+                <th>Nome da música</th>
+                <th>Tempo Liturgico</th>
+                <th>Ações</th>
+            </tr>
+            <tr>
+                <th>Entrada</th>
+                <td>{{ mass.entrance }}</td>
+                <td>{{ mass.entrance.liturgical_time }}</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="{{ mass.entrance.pdf_file.url }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                    </svg>
+                    Ver
+                </td>
+            </tr>
+            <tr>
+                <th>Ato Penitencial</th>
+                <td>{{ mass.penitential }}</td>
+                <td>{{ mass.penitential.liturgical_time }}</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="{{ mass.penitential.pdf_file.url }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                    </svg>
+                    Ver
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <th>Glória</th>
+                <td>{{ mass.glory }}</td>
+                <td>{{ mass.glory.liturgical_time }}</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="{{ mass.glory.pdf_file.url }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                    </svg>
+                    Ver
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <th>Aclamação</th>
+                <td>{{ mass.acclaim }}</td>
+                <td>{{ mass.acclaim.liturgical_time }}</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="{{ mass.acclaim.pdf_file.url }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                    </svg>
+                    Ver
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <th>Aclamação</th>
+                <td>{{ mass.acclaim }}</td>
+                <td>{{ mass.acclaim.liturgical_time }}</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="{{ mass.acclaim.pdf_file.url }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                    </svg>
+                    Ver
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <th>Ofertório</th>
+                <td>{{ mass.offertory }}</td>
+                <td>{{ mass.offertory.liturgical_time }}</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="{{ mass.offertory.pdf_file.url }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                    </svg>
+                    Ver
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <th>Santo</th>
+                <td>{{ mass.holy }}</td>
+                <td>{{ mass.holy.liturgical_time }}</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="{{ mass.holy.pdf_file.url }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                    </svg>
+                    Ver
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <th>Comunhão</th>
+                <td>{{ mass.communion }}</td>
+                <td>{{ mass.communion.liturgical_time }}</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="{{ mass.communion.pdf_file.url }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                    </svg>
+                    Ver
+                    </a>
+                </td>
+            </tr>
+            {% if mass.post_communion %}
+                <tr>
+                    <th>Pós-Comunhão</th>
+                    <td>{{ mass.post_communion }}</td>
+                    <td>{{ mass.post_communion.liturgical_time }}</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" href="{{ mass.post_communion.pdf_file.url }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                        </svg>
+                        Ver
+                        </a>
+                    </td>
+                </tr>
+            {% endif %}
+            <tr>
+                <th>Final</th>
+                <td>{{ mass.final }}</td>
+                <td>{{ mass.final.liturgical_time }}</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="{{ mass.final.pdf_file.url }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                    </svg>
+                    Ver
+                    </a>
+                </td>
+            </tr>
+            {% if mass.generic %}
+                <tr>
+                    <th>Genérica</th>
+                    <td>{{ mass.generic }}</td>
+                    <td>{{ mass.generic.liturgical_time }}</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" href="{{ mass.post_communion.pdf_file.url }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                            <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                            <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                        </svg>
+                        Ver
+                        </a>
+                    </td>
+                </tr>
+            {% endif %}
+        {% empty %}
+            Nada foi encontrado!
+    {% endfor %}
+{% endblock %}

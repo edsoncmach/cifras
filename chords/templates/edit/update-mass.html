@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block 'content' %}
+
+<h3>Cadastro da Missa</h3>
+<hr>
+    <div class="row align-items-center">
+        <div class="col"></div>
+        <div class="col-6">
+            <form action="" method="POST">{% csrf_token %}
+                <div class="row">
+                    <div class="col mb-3">
+                        <label class="form-label">Entrada</label>
+                        {{ form.entrance|as_crispy_field }}
+                    </div>
+                    <div class="col mb-3">
+                        <label class="form-label">Ato Penitencial</label>
+                        {{ form.penitential|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class=" col mb-3">
+                        <label class="form-label">Glória</label>
+                        {{ form.glory|as_crispy_field }}
+                    </div>
+                    <div class="col mb-3">
+                        <label class="form-label">Aclamação</label>
+                        {{ form.acclaim|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col mb-3">
+                        <label class="form-label">Ofertório</label>
+                        {{ form.offertory|as_crispy_field }}
+                    </div>
+                    <div class="col mb-3">
+                        <label class="form-label">Santo</label>
+                        {{ form.holy|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col mb-3">
+                        <label class="form-label">Comunhão</label>
+                        {{ form.communion|as_crispy_field }}
+                    </div>
+                    <div class="col mb-3">
+                        <label class="form-label">Pós-Comunhão</label>
+                        {{ form.post_communion|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col mb-3">
+                        <label class="form-label">Final</label>
+                        {{ form.final|as_crispy_field }}
+                    </div>
+                    <div class="col mb-3">
+                        <label class="form-label">Genérica</label>
+                        {{ form.generic|as_crispy_field }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3 mb-3">
+                        <label class="form-label">Data</label>
+                        {{ form.date|as_crispy_field }}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+                <a href="{% url 'list-mass' %}" class="btn btn-danger btn-sm">Cancelar</a>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+<hr>
+
+{% endblock %}

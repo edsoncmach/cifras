@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block 'content' %}
+    <h3>Excluir</h3>
+    <hr>
+    <form action="" method="POST">{% csrf_token %}
+        <p>Tem certeza que deseja excuir: <strong>({{ object }})</strong>?</p>
+
+        {{ form.as_p }}
+        <button class="btn btn-primary btn-sm" type="submit">Excluir</button>
+        <a href="{% url 'list-chords' %}" class="btn btn-danger btn-sm">Cancelar</a>
+    </form>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block 'content' %}
+
+<h3>Cadastro</h3>
+<hr>
+    <div class="row align-items-center">
+        <div class="col"></div>
+        <div class="col">
+            <form action="" method="POST" enctype="multipart/form-data">{% csrf_token %}
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nome</label>
+                    {{ form.name|as_crispy_field }}
+                </div>
+                <div class="mb-3">
+                    <label for="pdf_file" class="form-label">Arquivo</label>
+                    {{ form.pdf_file|as_crispy_field }}
+                    <div id="pdf_fileHelp" class="form-text">Uso recomendado de arquivo em pdf!</div>
+                </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Categoria</label>
+                    {{ form.category|as_crispy_field }}
+                </div>
+                <div class="mb-3">
+                    <label for="liturgical_time" class="form-label">Tempo Liturgico</label>
+                    {{ form.liturgical_time|as_crispy_field }}
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm">Salvar</button>
+                <a href="{% url 'list-chords' %}" class="btn btn-danger btn-sm">Cancelar</a>
+            </form>
+        </div>
+        <div class="col"></div>
+    </div>
+<hr>
+
+{% endblock %}

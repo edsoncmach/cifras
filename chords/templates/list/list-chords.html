@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
 {% block 'content' %}
-    <h3>Lista de Cifras</h3>
+    <h4>Lista de Cifras</h4>
     <hr>
     <a class="btn btn-primary btn-sm" href="{% url 'create-chord' %}">Cadastrar cifra</a>
     <hr>
     <table class="table table-striped table-sm">
-        <tr>
+        <tr class="table-info">
             <th>Nome</th>
             <th>PDF</th>
             <th>Categoria</th>
@@ -16,7 +16,7 @@
         {% for chord in object_list %}
         <tr>
             <td>{{ chord.name }}</td>
-            <td><a href="{{ chord.pdf_file.url }}">{{ chord.name }}</a></td>
+            <td><a class="btn btn-outline-primary btn-sm" href="{{ chord.pdf_file.url }}">{{ chord.name }}</a></td>
             <td>{{ chord.category }}</td>
             <td>{{ chord.liturgical_time }}</td>
             <td>
